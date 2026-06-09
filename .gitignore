@@ -1,0 +1,4 @@
+gesture_dataset_sample/
+.vscode/
+.DS_Store
+cnn_own.ipynb
