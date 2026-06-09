@@ -107,6 +107,11 @@ class HandDetector:
 
 
 class LiveCameraApp:
+    """This class integrates the hand detection and gesture classification to create a live camera application.
+    It responds to hand gestures by applying filters, zooming, and taking selfies.
+    Countdown and labels were implemented with the help of ChatGPT.
+    """
+
     def __init__(self, video_id=0, mac_os=False):
         self.video_id = video_id
         self.detector = HandDetector()
@@ -163,8 +168,7 @@ class LiveCameraApp:
             if self.zoom_on:
                 frame = self.add_zoom(frame)
             cv2.imwrite(args.path, frame)
-           
-            
+
             self.selfie_taken = True
             self.selfie_taken_timer = 60
             self.selfie_timer_active = False
@@ -220,7 +224,7 @@ class LiveCameraApp:
             display_frame = self.add_zoom(display_frame)
             cv2.putText(display_frame, "ZOOM: ON", (int(self.width * 0.05), int(self.height * 0.1)),
                         cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 255), 2)
-            
+
         if self.selfie_timer_active:
             cv2.putText(display_frame, f"{self.selfie_timer}", (int(
                 self.width / 2), int(self.height / 2)), cv2.FONT_HERSHEY_SIMPLEX, 10, (255, 255, 255), 10)
@@ -232,7 +236,7 @@ class LiveCameraApp:
             self.selfie_taken_timer -= 1
             if self.selfie_taken_timer == 0:
                 self.selfie_taken = False
-                
+
         img = cv2glet(display_frame, 'BGR')
         img.blit(0, 0, 0)
 
